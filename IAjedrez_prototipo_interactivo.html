@@ -71,16 +71,27 @@
 .confirm-btn:disabled{opacity:.55}
 .compare-links{font-size:11px;color:#5c7087;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 @media(max-width:660px){.node-field{grid-template-columns:1fr;gap:4px}.view-tabs{padding:9px 13px}}
+@media (min-width:1021px) {
+  body {height:100dvh;display:flex;flex-direction:column}
+  .topbar {flex:none}
+  .layout {width:100%;flex:1;min-height:0;grid-template-rows:minmax(0,1fr)}
+  .result-area {min-height:0}
+  .board-main {min-height:0;container-type:size;gap:8px}
+  .board-frame {max-width:min(575px,calc(100cqh - 72px))}
+  .board-main:has(.board-mode-hint:not([hidden])) .board-frame {max-width:min(575px,calc(100cqh - 130px))}
+  .chessboard {container-type:inline-size}
+  .square .piece {font-size:min(8.5cqw,55px)}
+}
 </style>
 </head>
 <body>
 <header class="topbar">
   <div class="brand"><span class="logo" aria-hidden="true">♙</span><div><h1>IAjedrez <span style="font-weight:450;color:#cbdcf2">/ Análisis de partida</span></h1><small>Aprende de tus jugadas, paso a paso</small></div></div>
-  <div class="topmeta"><span class="top-pill">✦ v2 · rediseño con guías de Johnson</span><button class="text-btn" id="reset" type="button" title="Restablecer la vista inicial">↺ Reiniciar</button></div>
+  <div class="topmeta"><button class="text-btn" id="reset" type="button" title="Restablecer la vista inicial">↺ Reiniciar</button></div>
 </header>
 <main class="layout">
   <section class="panel tree-panel" aria-label="Árbol de jugadas">
-    <div class="panel-header"><h2 class="panel-title"><span class="icon-dot" aria-hidden="true">⑂</span> Jugadas y variantes</h2><span class="subtle">Partida ejemplo</span></div>
+    <div class="panel-header"><h2 class="panel-title"><span class="icon-dot" aria-hidden="true">⑂</span> Jugadas y variantes</h2></div>
     <div class="tree-scroll">
       <div class="tree-help">Selecciona una jugada para verla en el tablero. Las consultas que añadas quedarán vinculadas a esa jugada.</div>
       <nav aria-label="Seleccionar jugada" class="tree-list" id="tree"></nav>
@@ -119,7 +130,6 @@
       <div class="composer-top"><label class="composer-label" for="question">Tu consulta</label><span class="composer-context" id="composer-context">Vinculada a 12. h3</span></div>
       <div class="compose-controls"><textarea id="question" class="question" rows="1" maxlength="300" required placeholder="Pregunta sobre esta jugada o un paso del análisis..."></textarea><button class="send" type="submit">Enviar ↗</button></div>
       <div id="notice" class="notice" role="status"></div>
-      <p class="composer-tip">Demostración con respuestas predefinidas: no consulta un modelo de IA ni calcula jugadas con un motor.</p>
     </form>
   </section>
 </main>
